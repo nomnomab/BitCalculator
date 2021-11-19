@@ -12,7 +12,7 @@ Simply head to the top of Unity and open the window from `Tools/Nomnom/Bit Calcu
 4. Provide the URL of this git repository: https://github.com/nomnomab/BitCalculator.git
 5. Click the 'add' button.
 
-![Overview](./GitResources~/overview.png)
+![Overview](./GitResources~/overview_gif.gif)
 
 ## What Can It Do?
 1. Has an input field that can take a literal string for a bit "formula".
