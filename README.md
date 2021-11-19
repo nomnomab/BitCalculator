@@ -2,7 +2,7 @@
 This asset allows users to convert literal strings into a bit output, and allows for easy bit flipping in-editor.
 
 ## Usage
-Simply head to the top of Unity, and open the window from `Tools/Bit Calculator`
+Simply head to the top of Unity, and open the window from `Tools/Nomnom/Bit Calculator`
 
 ## Installation
 #### Using Unity Package Manager
