@@ -1,5 +1,5 @@
 # Bit Calculator
-This asset allows users to convert literal strings into a bit output, and allows for easy bit flipping in-editor.
+This asset allows users to convert formulas into a bit output, and allows for easy bit flipping in-editor.
 
 ## Usage
 Simply head to the top of Unity and open the window from `Tools/Nomnom/Bit Calculator`.
