@@ -6,17 +6,20 @@ namespace Nomnom.BitCalculator.Editor {
     public static class OperationSolver {
         private static OperandType[] _operandOrder = {
             OperandType.Invert,
+            OperandType.Exponent,
+            OperandType.MultiplyDivide,
+            OperandType.AddSubtract,
             OperandType.LeftShift, OperandType.RightShift,
             OperandType.AND,
             OperandType.XOR,
             OperandType.OR
         };
         
-        public static int Solve(List<Operand> operands) {
+        public static long Solve(List<Operand> operands) {
             if (operands.Count == 1) {
-                return int.Parse(operands[0].Value);
+                return long.Parse(operands[0].Value);
             }
-            
+
             // need to collect group items first
             List<Operand> finalOperands = new List<Operand>();
             
@@ -63,7 +66,7 @@ namespace Nomnom.BitCalculator.Editor {
                     return group;
                 }
             }
-            
+
             // solve groups first
             OperandGroup rootGroup = new OperandGroup();
             foreach (Operand finalOperand in finalOperands) {
@@ -72,14 +75,6 @@ namespace Nomnom.BitCalculator.Editor {
             OperandResult result = (OperandResult)SolveGroup(rootGroup);
             
             return result.Result;
-            
-            // for (int i = 0; i < finalOperands.Count; i++) {
-            //     if (finalOperands[i] is OperandGroup group) {
-            //         finalOperands[i] = SolveGroup(group);
-            //     }
-            //     
-            //     Debug.Log($"[{i}] {finalOperands[i]?.Type}");
-            // }
         }
 
         private static Operand SolveGroup(OperandGroup group) {
@@ -94,11 +89,9 @@ namespace Nomnom.BitCalculator.Editor {
             }
             
             // evaluate
-            // Debug.Log($"{group.Operands[0]?.Type} {group.Operands[1]?.Type} {group.Operands[2]?.Type}");
 
             if (group.Operands.Count > 3) {
                 // solve in order
-                // sort
                 foreach (OperandType ty in _operandOrder) {
                     for (int i = 0; i < group.Operands.Count; i++) {
                         if (i < 0) {
@@ -113,14 +106,10 @@ namespace Nomnom.BitCalculator.Editor {
 
                             if (lhs is OperandGroup lhsGroup) {
                                 lhs = SolveGroup(lhsGroup);
-                                OperandResult rslt = lhs as OperandResult;
-                                Debug.Log(rslt?.Result);
                             }
                             
                             if (rhs is OperandGroup rhsGroup) {
                                 rhs = SolveGroup(rhsGroup);
-                                OperandResult rslt = rhs as OperandResult;
-                                Debug.Log(rslt?.Result);
                             }
                             
                             // found solve this batch
@@ -135,7 +124,7 @@ namespace Nomnom.BitCalculator.Editor {
                             group.Operands.RemoveAt(i);
 
                             // go to the next item
-                            i -= 3;
+                            i -= 2;
                         }
                     }
                 }
@@ -147,25 +136,28 @@ namespace Nomnom.BitCalculator.Editor {
         }
 
         private static OperandResult SolveTriplet(Operand operandLhs, Operand middle, Operand operandRhs) {
-            int lhs = operandLhs is OperandResult lhsResult ? lhsResult.Result : int.Parse(operandLhs.Value);
-            int rhs = operandRhs is OperandResult rhsResult ? rhsResult.Result : int.Parse(operandRhs.Value);
+            long lhs = operandLhs is OperandResult lhsResult ? lhsResult.Result : long.Parse(operandLhs.Value);
+            long rhs = operandRhs is OperandResult rhsResult ? rhsResult.Result : long.Parse(operandRhs.Value);
 
             switch (middle.Type) {
                 case OperandType.AND: return new OperandResult(lhs & rhs);
                 case OperandType.OR: return new OperandResult(lhs | rhs);
                 case OperandType.XOR: return new OperandResult(lhs ^ rhs);
-                case OperandType.LeftShift: return new OperandResult(lhs << rhs);
-                case OperandType.RightShift: return new OperandResult(lhs >> rhs);
+                case OperandType.LeftShift: return new OperandResult(lhs << (int)rhs);
+                case OperandType.RightShift: return new OperandResult(lhs >> (int)rhs);
                 case OperandType.Invert: return new OperandResult(~rhs);
+                case OperandType.AddSubtract: return new OperandResult(middle.Value == "+" ? lhs + rhs : lhs - rhs);
+                case OperandType.MultiplyDivide: return new OperandResult(middle.Value == "*" ? lhs * rhs : lhs / rhs);
+                case OperandType.Exponent: return new OperandResult((long)Mathf.Pow(lhs, rhs));
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
         private class OperandResult : Operand {
-            public int Result;
+            public long Result;
 
-            public OperandResult(int result) : base(OperandType.Result) {
+            public OperandResult(long result) : base(OperandType.Result) {
                 Result = result;
             }
         }

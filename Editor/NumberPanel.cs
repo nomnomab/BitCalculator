@@ -144,11 +144,29 @@ namespace Nomnom.BitCalculator.Editor {
                             case '^':
                                 operands.Add(new Operand(OperandType.XOR));
                                 break;
+                            case '+':
+                                operands.Add(new Operand(OperandType.AddSubtract, "+"));
+                                break;
+                            case '-':
+                                operands.Add(new Operand(OperandType.AddSubtract, "-"));
+                                break;
+                            case '*':
+                                if (formula[i + 1] == '*') {
+                                    operands.Add(new Operand(OperandType.Exponent));
+                                    i++;
+                                    break;
+                                }
+                                
+                                operands.Add(new Operand(OperandType.MultiplyDivide, "*"));
+                                break;
+                            case '/':
+                                operands.Add(new Operand(OperandType.MultiplyDivide, "/"));
+                                break;
                         }
                     }
 
                     // create operations
-                    int output = OperationSolver.Solve(operands);
+                    long output = OperationSolver.Solve(operands);
                     
                     _internalValue = output;
                     UpdateConversions();
