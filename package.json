@@ -1,0 +1,18 @@
+{
+  "name": "com.nomnom.bit-calculator",
+  "version": "1.0.0",
+  "displayName": "Nomnom's Bit Calculator",
+  "description": "This asset allows users to convert literal strings into a bit output, and allows for easy bit flipping in-editor.",
+  "unity": "2020.3",
+  "unityRelease": "20f1",
+  "keywords": [
+    "nomnom",
+    "bit",
+    "calculator"
+  ],
+  "author": {
+    "name": "Andrew Burke",
+    "email": "nomnomab1@gmail.com"
+  },
+  "type": "library"
+}

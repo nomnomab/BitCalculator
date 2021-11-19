@@ -1,0 +1,14 @@
+{
+    "name": "com.nomnom.bit-calculator",
+    "rootNamespace": "Nomnom.BitCalculator",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
