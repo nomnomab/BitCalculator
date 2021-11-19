@@ -2,27 +2,28 @@
 This asset allows users to convert literal strings into a bit output, and allows for easy bit flipping in-editor.
 
 ## Usage
-Simply head to the top of Unity and open the window from `Tools/Nomnom/Bit Calculator`
+Simply head to the top of Unity and open the window from `Tools/Nomnom/Bit Calculator`.
 
 ## Installation
 #### Using Unity Package Manager
-1. Open the Package Manager from `Window/Package Manager`
-2. Click the '+' button in the top-left of the window
-3. Click 'Add package from git URL'
+1. Open the Package Manager from `Window/Package Manager`.
+2. Click the '+' button in the top-left of the window.
+3. Click 'Add package from git URL'.
 4. Provide the URL of this git repository: https://github.com/nomnomab/BitCalculator.git
-5. Click the 'add' button
+5. Click the 'add' button.
 
 ![Overview](./GitResources~/overview.png)
 
 ## What Can It Do?
-1. Has an input field that can take a literal string for a bit "formula"
+1. Has an input field that can take a literal string for a bit "formula".
 2. Bits are shown at the bottom of the window. 
-   - These can be pressed to get "flipped" to their opposite value (0 to 1 and 1 to 0 respectively)
+   - These can be pressed to get "flipped" to their opposite value (0 to 1 and 1 to 0 respectively).
 3. Shows the formula output in multiple values:
    - Hexadecimal
    - Decimal
    - Octal
    - Binary
+4. Is based on the Window's Calculator programmer mode, so it can do a good chunk of what that can do.
 
 ## Supported Operations
 > Integer operations only
